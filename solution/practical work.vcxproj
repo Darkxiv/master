@@ -29,6 +29,17 @@
     <ClCompile Include="src\sceneObjects.cpp" />
     <ClCompile Include="src\shaderWorker.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="data\shaders\ball.glslf" />
+    <None Include="data\shaders\ball.glslv" />
+    <None Include="data\shaders\plane.glslf" />
+    <None Include="data\shaders\plane.glslv" />
+    <None Include="data\shaders\shadow.glslv" />
+    <None Include="data\shaders\simple.glslf" />
+    <None Include="data\shaders\simple.glslv" />
+    <None Include="data\shaders\skybox.glslf" />
+    <None Include="data\shaders\skybox.glslv" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{AAFFA7CF-03CD-4BE7-B5B5-2039787723CD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -78,7 +89,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glimgD.lib;glew32s.lib;freeglut_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;freeglut_static.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>.\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

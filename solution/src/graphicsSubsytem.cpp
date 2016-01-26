@@ -13,7 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <glimg/glimg.h>
+//#include <glimg/glimg.h>
 
 #define loadSky 1
 
@@ -115,18 +115,22 @@ void GraphicsSubsystem::loadUniforms(GLuint pr, const char *uniforms[], int usiz
 
 void GraphicsSubsystem::loadTexture(const char *filename, GLuint &texture)
 {
-	std::auto_ptr<glimg::ImageSet> pImageSet(glimg::loaders::stb::LoadFromFile(filename));
-
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	glimg::SingleImage image = pImageSet->GetImage(0, 0, 0);
+	/*
+    std::auto_ptr<glimg::ImageSet> pImageSet(glimg::loaders::stb::LoadFromFile(filename));
+    glimg::SingleImage image = pImageSet->GetImage(0, 0, 0);
 	glimg::Dimensions dims = image.GetDimensions();
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, dims.width, dims.height, 0,
-		GL_RGB, GL_UNSIGNED_BYTE, image.GetImageData());
+		GL_RGB, GL_UNSIGNED_BYTE, image.GetImageData());*/
+    uint32_t img[4] = { 0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x0 };
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, img );
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, pImageSet->GetMipmapCount() - 1);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);
+    glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+    glTexParameteri( GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
@@ -136,12 +140,15 @@ void GraphicsSubsystem::loadCubemap(const char *filenames[], int csize, GLuint &
 	glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
 	for(int i = 0; i < csize; i++)
 	{
+        /*
 		std::auto_ptr<glimg::ImageSet> pImageSet(glimg::loaders::stb::LoadFromFile(filenames[i]));
 		glimg::SingleImage image = pImageSet->GetImage(0, 0, 0);
 		glimg::Dimensions dims = image.GetDimensions();
 
 		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0,	GL_RGB, dims.width, dims.height, 0,
-			GL_RGB, GL_UNSIGNED_BYTE, image.GetImageData());
+			GL_RGB, GL_UNSIGNED_BYTE, image.GetImageData());*/
+        uint32_t img[4] = { 0x0, 0xFFFFFFFF, 0xFFFFFFFF, 0x0 };
+        glTexImage2D( GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, img );
 	}
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -199,8 +206,10 @@ void GraphicsSubsystem::createSampler()
 	glGenSamplers(1, &sampler);
 	glSamplerParameteri(sampler, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glSamplerParameteri(sampler, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glSamplerParameteri(sampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glSamplerParameteri(sampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glSamplerParameteri( sampler, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+    glSamplerParameteri( sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 }
 
 void GraphicsSubsystem::loadShaders()

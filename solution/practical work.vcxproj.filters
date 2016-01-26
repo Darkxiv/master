@@ -63,4 +63,33 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="data\shaders\ball.glslf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\shaders\ball.glslv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\shaders\plane.glslf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\shaders\plane.glslv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\shaders\shadow.glslv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\shaders\simple.glslf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\shaders\simple.glslv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\shaders\skybox.glslf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="data\shaders\skybox.glslv">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
