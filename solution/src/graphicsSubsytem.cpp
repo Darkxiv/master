@@ -486,7 +486,7 @@ void GraphicsSubsystem::shadowMapPass(const Mesh *target, LightSubsystem &lss)
 		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, shadowFbo[i]);
 		glClear(GL_DEPTH_BUFFER_BIT);
 
-		modelLightWorldClip[i] = glm::perspective(45.0f, (windowSize.x / (float)windowSize.y), zNear, zFar) *
+		modelLightWorldClip[i] = glm::perspective(45.0f, 1.0f, zNear, zFar) *
 			calcLookAtMatrix(lPosData[i], target->getWorldPos(), glm::vec3(0.0f, 0.0f, 1.0f)); // (0, 0, 1) - optimized for the ball
 
 		glm::mat4 modelToClipMatrix = modelLightWorldClip[i] * modelMatrix;
@@ -575,9 +575,9 @@ void GraphicsSubsystem::rotateCam(const glm::vec3 &diff)
 
 GraphicsSubsystem::~GraphicsSubsystem()
 {
-	for (std::map<std::string, GLuint>::iterator buff = uniformBuffers.begin(); buff != uniformBuffers.end(); buff++)
+    for ( std::unordered_map<std::string, GLuint>::iterator buff = uniformBuffers.begin( ); buff != uniformBuffers.end( ); buff++ )
 		glDeleteBuffers(1, &buff->second);
-	for (std::map<std::string, GLuint>::iterator tex = textures.begin(); tex != textures.end(); tex++)
+    for ( std::unordered_map<std::string, GLuint>::iterator tex = textures.begin( ); tex != textures.end( ); tex++ )
 		glDeleteTextures(1, &tex->second);
 	glDeleteBuffers(NUMBER_OF_LIGHTS, shadowFbo);
 	for (int i = 0; i < NUMBER_OF_LIGHTS; i++)

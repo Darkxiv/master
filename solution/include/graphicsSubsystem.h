@@ -7,7 +7,7 @@
 
 #include <string>
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <algorithm>
 
 class GraphicsSubsystem
@@ -55,18 +55,18 @@ private:
 	glm::vec3 viewVector;
 	glm::mat4 worldToCam;
 
-	std::map<std::string, GLuint> shaders;
-	std::map<std::string, GLuint> bindingIndexes;
-	std::map<std::string, GLuint> texUnits;
-	std::map<std::string, GLuint> uniformBuffers;
-	std::map<std::string, GLuint> textures;
+    std::unordered_map<std::string, GLuint> shaders;
+    std::unordered_map<std::string, GLuint> bindingIndexes;
+    std::unordered_map<std::string, GLuint> texUnits;
+    std::unordered_map<std::string, GLuint> uniformBuffers;
+    std::unordered_map<std::string, GLuint> textures;
 
 	GLuint sampler;
 	GLuint shadowMapTextures[NUMBER_OF_LIGHTS];
 	GLuint shadowFbo[NUMBER_OF_LIGHTS];
 	GLint shadowTexUnit[NUMBER_OF_LIGHTS];
 	glm::mat4 modelLightWorldClip[NUMBER_OF_LIGHTS];
-	std::map<GLenum, std::map<std::string, GLuint> > programUniforms;
+    std::unordered_map<GLenum, std::unordered_map<std::string, GLuint> > programUniforms;
 
 	void createDepthBuffer();
 	void reallocShadowTextures();
