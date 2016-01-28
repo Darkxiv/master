@@ -164,8 +164,8 @@ void GraphicsSubsystem::createDepthBuffer()
 	{
 		glGenTextures(1, &shadowMapTextures[i]);
 		glBindTexture(GL_TEXTURE_2D, shadowMapTextures[i]);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, windowSize.x, windowSize.y, 0, 
-			GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, 1024, 1024,//windowSize.x, windowSize.y, SIZEOF_DEPTH_BUFFER
+            0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
